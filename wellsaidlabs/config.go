@@ -1,11 +1,11 @@
 package wellsaidlabs
 
 type Config struct {
-	Login     string
-	Password  string
-	Voice     string
-	Headless  bool
-	Debug     bool
-	Timeout   int64
-	UserAgent string
+	Login     string `json:"login,omitempty"`
+	Password  string `json:"password,omitempty"`
+	Voice     string `json:"voice,omitempty"`
+	Headless  bool   `json:"headless,omitempty"`
+	Debug     bool   `json:"debug,omitempty"`
+	Timeout   int64  `json:"timeout,omitempty"`
+	UserAgent string `json:"user_agent,omitempty"`
 }
