@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-func (wl *Wellsaidlabs) signIn(ctx context.Context, login string, password string) error {
-	if login == "" || password == "" {
+func (wl *Wellsaidlabs) SignIn(ctx context.Context) error {
+	if wl.config.Login == "" || wl.config.Password == "" {
 		return fmt.Errorf("login or Password not provided")
 	}
 
@@ -45,10 +45,10 @@ func (wl *Wellsaidlabs) signIn(ctx context.Context, login string, password strin
 	}
 
 	signin := chromedp.Tasks{
-		chromedp.SendKeys(loginInputSel, login, chromedp.NodeVisible),
+		chromedp.SendKeys(loginInputSel, wl.config.Login, chromedp.NodeVisible),
 		chromedp.Sleep(5 * time.Second),
 
-		chromedp.SendKeys(`input[type="password"]`, password, chromedp.NodeVisible),
+		chromedp.SendKeys(`input[type="password"]`, wl.config.Password, chromedp.NodeVisible),
 		chromedp.Click(`button[type="submit"]`, chromedp.NodeVisible),
 		chromedp.Sleep(5 * time.Second),
 

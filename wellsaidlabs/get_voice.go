@@ -17,13 +17,13 @@ import (
 
 var voiceSlice [][]byte
 
-func (wl *Wellsaidlabs) GetVoice(textPath string, voice string) ([]byte, error) {
+func (wl *Wellsaidlabs) GetVoice(ctx context.Context, textPath string, voice string) ([]byte, error) {
 	text, err := os.ReadFile(textPath)
 	if err != nil {
 		return nil, err
 	}
 
-	err = chromedp.Run(wl.ctx, chromedp.Tasks{
+	err = chromedp.Run(ctx, chromedp.Tasks{
 		network.Enable(),
 		chromedp.Sleep(5 * time.Second),
 		chromedp.Click(`div[data-e2e="project-card"]`, chromedp.NodeVisible),
@@ -40,13 +40,13 @@ func (wl *Wellsaidlabs) GetVoice(textPath string, voice string) ([]byte, error) 
 	re, _ := regexp.Compile(`[\w\W\s]{0,900}[^.!? ]+[.!?]+`)
 	tempStr := strings.Replace(string(text), el.String(), " ", -1)
 
-	listenForNetworkEvent(wl.ctx)
+	listenForNetworkEvent(ctx)
 	for {
 		textPart := re.FindString(tempStr)
 		tempStr = strings.Replace(tempStr, textPart, "", 1)
 
 		textAreaSel := `textarea[data-e2e="project-editor"]`
-		if err = chromedp.Run(wl.ctx, chromedp.Tasks{
+		if err = chromedp.Run(ctx, chromedp.Tasks{
 			chromedp.SetValue(textAreaSel, ""),
 			chromedp.SendKeys(textAreaSel, textPart, chromedp.NodeVisible),
 			//chromedp.Sleep(2 * time.Second),

@@ -1,7 +1,10 @@
 package wellsaidlabs
 
-import "github.com/chromedp/chromedp"
+import (
+	"context"
+	"github.com/chromedp/chromedp"
+)
 
-func (wl *Wellsaidlabs) Close() error {
-	return chromedp.Cancel(wl.ctx)
+func (wl *Wellsaidlabs) Close(ctx context.Context) error {
+	return chromedp.Cancel(ctx)
 }

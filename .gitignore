@@ -3,6 +3,7 @@
 *.lnk
 *.exe
 profiles
-.idea
 articles
 voices
+config.json
+wellsaid_profiles
