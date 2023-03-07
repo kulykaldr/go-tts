@@ -25,7 +25,9 @@ func (wl *Wellsaidlabs) GetVoice(textPath string, voice string) ([]byte, error) 
 
 	err = chromedp.Run(wl.ctx, chromedp.Tasks{
 		network.Enable(),
+		chromedp.Sleep(5 * time.Second),
 		chromedp.Click(`div[data-e2e="project-card"]`, chromedp.NodeVisible),
+		chromedp.Sleep(5 * time.Second),
 		chromedp.Click(`//*[@id="page-studio"]//img[@class="MuiAvatar-img"]/ancestor::button`, chromedp.NodeVisible),
 		chromedp.Click(fmt.Sprintf(`//p[text()='%s']`, voice), chromedp.NodeVisible),
 		chromedp.Sleep(2 * time.Second),
