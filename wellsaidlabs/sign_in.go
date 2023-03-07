@@ -52,7 +52,7 @@ func (wl *Wellsaidlabs) signIn(ctx context.Context, login string, password strin
 		chromedp.Click(`button[type="submit"]`, chromedp.NodeVisible),
 		chromedp.Sleep(5 * time.Second),
 
-		chromedp.WaitReady(`div[data-e2e="action-user-profile-menu-account"]`),
+		chromedp.WaitReady(`button[data-e2e="action-project-create"]`),
 	}
 
 	err = chromedp.Run(ctx, signin)
