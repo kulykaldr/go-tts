@@ -15,7 +15,7 @@ func (wl *Wellsaidlabs) CreateContext(ctx context.Context) (context.Context, con
 	// create a timeout
 	timeCtx, cancel := context.WithTimeout(ctxInterr, time.Duration(wl.config.Timeout)*time.Minute)
 
-	profileDir := CreateDirPath("wellsaid_profiles", wl.config.Login)
+	profileDir := CreateDirPath("profiles", wl.config.Login)
 
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		//chromedp.DisableGPU,
