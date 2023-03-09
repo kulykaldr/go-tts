@@ -45,6 +45,10 @@ func (wl *Wellsaidlabs) GetVoice(ctx context.Context, textPath string, voice str
 		textPart := re.FindString(tempStr)
 		tempStr = strings.Replace(tempStr, textPart, "", 1)
 
+		if len(strings.TrimSpace(textPart)) == 0 {
+			break
+		}
+
 		textAreaSel := `textarea[data-e2e="project-editor"]`
 		if err = chromedp.Run(ctx, chromedp.Tasks{
 			chromedp.SetValue(textAreaSel, ""),
